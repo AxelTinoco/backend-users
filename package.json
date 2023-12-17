@@ -3,17 +3,35 @@
   "version": "1.0.0",
   "description": "Prueba tecnica",
   "main": "src/index.js",
+  "type": "module",
   "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "MongoDB"
+  ],
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/AxelTinoco/backend-users.git"
   },
-  "author": "",
+  "author": "Axel",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AxelTinoco/backend-users/issues"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
   },
   "homepage": "https://github.com/AxelTinoco/backend-users#readme"
 }
