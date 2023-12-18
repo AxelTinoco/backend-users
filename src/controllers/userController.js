@@ -1,11 +1,9 @@
-import User from '../models/userModel.js';
+// userController.js
+import * as userService from '../services/userService.js';
 
 export const getUsers = async (req, res) => {
   try {
-    // Obtener todos los usuarios de la base de datos
-    const users = await User.find();
-
-    // Enviar una respuesta al cliente
+    const users = await userService.getAllUsers();
     res.status(200).json(users);
   } catch (error) {
     console.error(error);
@@ -16,18 +14,16 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
   try {
     const { id } = req.params;
+    const user = await userService.getUserById(id);
 
-    // Buscar un usuario por su ID en la base de datos
-    const user = await User.findById(id);
     if (!user) {
-      return res.status(404).json({ message: 'User no encontrado' });
+      return res.status(404).json({ message: 'Usuario no encontrado' });
     }
 
-    // Enviar una respuesta al cliente
     res.status(200).json(user);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'error al obtener el usuario' });
+    res.status(500).json({ message: 'Error al obtener el usuario' });
   }
 };
 
@@ -36,42 +32,24 @@ export const updateUser = async (req, res) => {
     const { id } = req.params;
     const { email, password } = req.body;
 
-    // Buscar un usuario por su ID en la base de datos
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
-    }
-
-    // Actualizar el correo electrónico y la contraseña del usuario
-    if (email) user.email = email;
-    if (password) user.password = await bcrypt.hash(password, 10);
-    await user.save();
-
-    // Enviar una respuesta al cliente
-    res.status(200).json(user);
+    const updatedUser = await userService.updateUserById(id, email, password);
+    res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'error al actualizar el usuario' });
+    res.status(500).json({ message: 'Error al actualizar el usuario' });
   }
 };
 
 export const deleteUser = async (req, res) => {
   try {
+    console.log(req.params)
     const { id } = req.params;
+    console.log(id,"ID DEL USUARIO")
+    const deletedUser = await userService.deleteUserById(id);
 
-    // Buscar un usuario por su ID en la base de datos
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
-    }
-
-    // Eliminar el usuario de la base de datos
-    await user.remove();
-
-    // Enviar una respuesta al cliente
-    res.status(200).json(user);
+    res.status(200).json(deletedUser);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'error al eliminar el usuario' });
+    res.status(500).json({ message: 'Error al eliminar el usuario' });
   }
 };
