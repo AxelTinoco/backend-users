@@ -4,10 +4,7 @@ import config from './config.js';
 const connectDB = async () => {
   try {
     // Crear conexión a MongoDB utilizando la URI de configuración
-    const connection = await mongoose.connect(config.mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const connection = await mongoose.connect(config.mongoURI);
 
     // Manejador de evento 'connected' para indicar la conexión exitosa a MongoDB
     connection.connection.on('connected', () => {
