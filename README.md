@@ -27,6 +27,15 @@ Correr el proyecto
 ```bash
   npm run dev
 ```
+
+## Pruebas o testing con Jest
+
+Correr el testing
+
+```bash
+  npm test
+```
+    
     
 ## API Reference
 
