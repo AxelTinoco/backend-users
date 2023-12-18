@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import * as authService from '../src/services/authService';
 import config from '../src/config';
-import User from '../src/models/userModel'; // Importa el modelo User directamente
+import User from '../src/models/userModel';
 
 describe('authService', () => {
   describe('registerUser', () => {
@@ -49,5 +49,4 @@ describe('authService', () => {
     });
   });
 
-  // Puedes agregar más pruebas para otras funciones del servicio authService
 });
